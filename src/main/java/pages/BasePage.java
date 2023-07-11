@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,15 +15,6 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public LoginPage getLogInPage() {
-        return new LoginPage(driver);
-    }
-
-    public ProductsPage getProductsPage() {
-        return new ProductsPage(driver);
     }
 
     public void waitForVisibilityOfElement(WebElement element) {

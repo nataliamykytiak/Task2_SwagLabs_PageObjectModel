@@ -1,12 +1,10 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class ProductsPage extends BasePage {
-    @FindBy(xpath = "//div[@class='app_logo']")
-    private WebElement appLogo;
+    By appLogo = By.xpath("//div[@class='app_logo']");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -14,6 +12,6 @@ public class ProductsPage extends BasePage {
 
     public String getAppLogoText() {
         waitForPageLoadComplete();
-        return appLogo.getText();
+        return driver.findElement(appLogo).getText();
     }
 }

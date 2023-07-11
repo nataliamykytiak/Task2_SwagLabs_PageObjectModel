@@ -1,5 +1,4 @@
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductsPage;
@@ -13,16 +12,11 @@ public class LoginTests extends BaseTest {
     private final String VALID_USERNAME = "standard_user";
     private final String VALID_PASSWORD = "secret_sauce";
 
-    @Override
-    @BeforeMethod
-    public void testsSetUp() {
-        super.testsSetUp();
-        loginPage = basePage.getLogInPage();
-        productsPage = basePage.getProductsPage();
-    }
 
     @Test(description = "UC -1 - Test Login form with empty credentials")
     public void loginFormWithEmptyCredentialsTest() {
+        loginPage = new LoginPage(driver);
+        loginPage.goToLoginUrl();
         loginPage.enterUsername(INVALID_USERNAME);
         loginPage.enterPassword(INVALID_PASSWORD);
         loginPage.clearUsernameInput();
@@ -33,6 +27,8 @@ public class LoginTests extends BaseTest {
 
     @Test(description = "UC -2 - Test Login form with credentials by passing Username.")
     public void loginFormWithCredentialsByPassingUsernameTest() {
+        loginPage = new LoginPage(driver);
+        loginPage.goToLoginUrl();
         loginPage.enterUsername(INVALID_USERNAME);
         loginPage.enterPassword(INVALID_PASSWORD);
         loginPage.clearPasswordInput();
@@ -42,9 +38,12 @@ public class LoginTests extends BaseTest {
 
     @Test(description = "UC -3 - Test Login form with credentials by passing Username & Password ")
     public void loginFormWithCredentialsByPassingUsernameAndPasswordTest() {
+        loginPage = new LoginPage(driver);
+        loginPage.goToLoginUrl();
         loginPage.enterUsername(VALID_USERNAME);
         loginPage.enterPassword(VALID_PASSWORD);
         loginPage.clickLoginButton();
+        productsPage = new ProductsPage(driver);
         Assert.assertEquals(productsPage.getAppLogoText(), "Swag Labs");
     }
 
